@@ -35,8 +35,8 @@ int main()
 		for(int i = 0; i < N; i++){
 
 			string line;
-			char tmp[256];
-			scanf("%s", tmp);
+			char tmp[256]
+;			scanf("%s", tmp);
 			line = tmp;
 			for (int j = 0; j < M; j++){
 				field[i][j] = line[j];
