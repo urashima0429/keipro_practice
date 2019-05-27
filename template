@@ -1,0 +1,10 @@
+[https://atcoder.jp/contests/abc126/tasks/abc126_f:embed:cite]
+
+#####考えたこと
+条件は
+>[tex:M]個の[tex: X_i, Y_i, Z_i]が与えられ、[tex:A_Xi + A_Yi + Zi]は偶数である。  
+
+
+```cpp
+
+```

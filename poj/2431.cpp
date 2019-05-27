@@ -2,20 +2,9 @@
 #include <queue>
 using namespace std;
 
-const int MAX_N = 10000;
-
-// 4
-// 4 4 
-// 5 2 
-// 11 5 
-// 15 10
-// 25 10
-
-// 2
-
 void solve() {
 
-    int N, A[MAX_N], B[MAX_N], L, P;
+    int N, A[10000 + 10], B[10000 + 10], L, P;
 
     // input
     cin >> N;
