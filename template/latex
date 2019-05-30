@@ -1,0 +1,18 @@
+\documentclass{jsarticle}
+\usepackage{listings}
+\usepackage[dvipdfmx]{graphicx}
+
+\title{ report name }
+
+\author{ author name }
+\date{\today}
+
+\begin{document}
+\maketitle
+\clearpage
+
+\subsection{}
+
+
+
+\end{document}
