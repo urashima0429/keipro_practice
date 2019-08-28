@@ -5,32 +5,97 @@
 using namespace std;
 typedef long long ll;
 
+// TLE
+
 int main(){
     string s,t;
     vector<int> A[26];
     cin >> s >> t;
-    for (int i = 1; i <= s.length(); ++i){
+    int S = s.length();
+    int T = t.length();
+    for (int i = 1; i <= S; ++i){
         A[s[i-1] - 97].push_back(i);
+        A[s[i-1] - 97].push_back(i + S);
     }
-
-    bool cant = false;
-    int prev = 0, ans = 0;
-    for (int i = 1; i <= t.length(); ++i){
-        if (A[t[i-1] - 97].size() <= 0) {
-            cant = true;
+    for (int i = 1; i <= 26; ++i){
+        sort(A[i-1].begin(), A[i-1].end());
+    }
+    
+    bool check = false;
+    ll ans = 0LL;
+    int prev = 0;
+    for (int i = 1; i <= T; ++i){
+        auto v = A[t[i-1] - 97]; 
+        auto b = upper_bound(v.begin(), v.end(), prev);
+        if (b == v.end()) {
+            check = true;
             break;
         }
-        vector<int> c = A[t[i-1] - 97];
-        for (auto _c : c){
-            if (c)
-        }
-        
-        cout << prev <<endl;
-
+        int k = b - v.begin();
+        ans += (ll)(v[k] - prev);
+        prev = v[k] >= S ? v[k]-S : v[k];
     }
-    if (cant){
-        cout << -1 << endl;
+    if (check){
+        cout << -1 << endl;       
     }else{
-        cout << ans << endl;
+        cout << ans << endl;        
     }
+    return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
+
