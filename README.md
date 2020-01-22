@@ -1,4 +1,7 @@
 # keipro_practice
 
 ## Overview
-keiproをしなければならない気がするので練習する
+主にAtcoder
+
+## Author
+[urashima0429](https://github.com/urashima0429)
