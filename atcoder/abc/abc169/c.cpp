@@ -1,10 +1,12 @@
 #include <iostream>
-
+#include <cmath>
 using namespace std;
 typedef long long ll;
 
 int main() {
-    double A, B;
+    ll A;
+    double B;
     cin >> A >> B;
-    cout << (ll)(A*B) << endl;
+    ll res = A * (ll)floor(B * 100 + 0.001) / 100;
+    cout << res << endl;
 }

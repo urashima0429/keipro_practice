@@ -1,28 +1,36 @@
 #include <iostream>
 #include <queue>
 using namespace std;
+typedef long long ll;
 
 int main() {
-    int N, M, K, A[200010], B[200010], sum = 0;
+    int N, M, K, A[200010], B[200010];
 	cin >> N >> M >> K;
-    A[0] = 0;
-    for (int i = 1; i <= N; ++i){
-        int a; 
-        cin >> a;
-        A[i] = A[i-1] + a;
+    for (int i = 0; i < N; ++i){
+        cin >> A[i];
     }
     for (int i = 0; i < M; ++i){
         cin >> B[i];
     }
 
-    for (int i = N; i >= 0; ++i){
-        
+    int sum = 0, i = 0, j = 0;
+    while (i < N && sum + A[i] <= K){
+        sum += A[i++];
+    }
+    while (j < M && sum + B[j] <= K){
+        sum += B[j++];
     }
 
 
+    int ans = i + j;
+    while (i > 0){
+        sum -= A[--i];
 
-
-
+        while (j < M && sum + B[j] <= K){
+            sum += B[j++];
+        }
+        ans = max(ans, i+j);
+    }
 
     cout << ans << endl;
 	return 0;

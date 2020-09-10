@@ -4,7 +4,8 @@ using namespace std;
 typedef long long ll;
 
 int main() {
-	int N, K, P[5010], C[5010];
+	int N, K, P[5010];
+    ll C[5010]; 
 	cin >> N >> K;
     for (int i = 0; i < N; ++i){
         cin >> P[i];
@@ -13,31 +14,36 @@ int main() {
         cin >> C[i];
     }
 
-    ll sum = 0;
+    ll ans = -1e18;
     for (int i = 0; i < N; ++i){
-        sum += C[i];
-    }
+        int address = i, roop_size = -1;
+        ll score[5010];
+        score[0] = 0;
+        for (int j = 1; j <= N; ++j){
+            address = P[address]-1;
+            score[j] = score[j-1] + C[address];
+            if (address == i && roop_size == -1){
+                roop_size = j;
+            }
+        }
 
-    ll ans = 0;
-    ans += sum * ((K-1) / N);
-    
-
-    ll M = -9e18;
-    for (int i = 0; i < N; ++i){
-        ll score = 0;
-        int index = i;
-        for (int j = 0; j < (K-1) % N + 1; ++j){
-            index = P[index]-1;
-            score += C[index];
-            M = max(M, score);
+        if (K < roop_size){
+            for (int i = 1; i <= K; ++i) {
+                ans = max(ans, score[i]);
+            }
+        } else {
+            if (score[roop_size] >= 0){
+                for (int i = 0; i < roop_size; ++i) {
+                    ans = max(ans, score[roop_size] * ((K-i)/roop_size) + score[(K-i)%roop_size]);
+                }
+            }else{
+                for (int i = 1; i <= roop_size; ++i) {
+                    ans = max(ans, score[i]);
+                }
+            }
         }
     }
 
-    if (ans >= 0){
-        cout << ans + M << endl;
-    }else{
-        cout <<  M << endl;    
-    }
-
+    cout << ans << endl;
 	return 0;
 }
