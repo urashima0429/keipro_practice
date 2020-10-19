@@ -2,15 +2,27 @@
 using namespace std;
 
 int main() {
-    int A, B, C, K;
-    cin >> A >> B >> C >> K;
-
-    if (K <= A){
-    	cout << K << endl; 
-    } else if (K <= A+B){
-    	cout << A << endl;
-    } else {
-    	cout << A - (K-A-B) << endl;
+    int N, K;
+    bool treat[110];
+    cin >> N >> K;
+    for (int i = 0; i < N; ++i){
+        treat[i] = true;
     }
+
+    for (int i = 0; i < K; ++i){
+        int d;
+        cin >> d;
+        for (int j = 0; j < d; ++j){
+            int a;
+            cin >> a;
+            treat[a-1] = false;
+        }
+    }
+
+    int res = 0;
+    for (int i = 0; i < N; ++i){
+        if (treat[i]) res++;
+    }
+    cout << res << endl;
     return 0;
 }
