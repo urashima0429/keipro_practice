@@ -3,14 +3,16 @@ using namespace std;
 typedef long long ll;
 
 int main(){
+    int X;
+    cin >> X;
 
-    int i;
-    for (i = 0; i*i*i*i*i < 1000000000; ++i){
-        
+    for (ll a = -1000; a <= 1000; ++a){
+        for (ll b = -1000; b <= 1000; ++b){
+            if (a*a*a*a*a - b*b*b*b*b == X) {
+                cout << a << " " << b << endl;
+                return 0;
+            }
+        }
     }
-    cout << i << endl; 
-
-
-
     return 0;
 }

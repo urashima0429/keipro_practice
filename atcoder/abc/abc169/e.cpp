@@ -16,7 +16,7 @@ int main(){
     if ( N % 2 == 1){
         cout << B[N/2] - A[N/2] + 1 << endl;
     } else {
-        cout << B[N/2-1] + B[N/2] - A[N/2-1] - A[N/2] << endl;
+        cout << B[N/2-1] + B[N/2] - A[N/2-1] - A[N/2]  + 1<< endl;
     }
 
     return 0;

@@ -1,12 +1,50 @@
 #include <iostream>
-#include <queue>
 using namespace std;
 typedef long long ll;
 
-int R, C, K, V[3010][3010], dp[3010][3010][4];
+const ll INF = 2e18;
+int R, C, K;
+ll V[3010][3010], dp[3010][3010][4];
+
+ll dfs(int r, int c, int s){
+    if (dp[r][c][s] != -INF) return dp[r][c][s];
+
+    ll res = 0;
+    if (r > 0){
+        if (s == 0){
+            res = max(res, dfs(r-1, c, 0));
+            res = max(res, dfs(r-1, c, 1));
+            res = max(res, dfs(r-1, c, 2));
+            res = max(res, dfs(r-1, c, 3));
+        }
+        if (s == 1){
+            res = max(res, dfs(r-1, c, 0) + V[r][c]);
+            res = max(res, dfs(r-1, c, 1) + V[r][c]);
+            res = max(res, dfs(r-1, c, 2) + V[r][c]);
+            res = max(res, dfs(r-1, c, 3) + V[r][c]);
+
+        }
+    }
+    if (c > 0){
+        res = max(res, dfs(r, c-1, s));
+        if (s > 0){
+            res = max(res, dfs(r, c-1, s-1) + V[r][c]);    
+        }
+    }
+
+    return dp[r][c][s] = res;
+}
 
 int main() {
 	cin >> R >> C >> K;
+    for (int r = 0; r < R; ++r){
+        for (int c = 0; c < C; ++c){
+            dp[r][c][0] = -INF;
+            dp[r][c][1] = -INF;
+            dp[r][c][2] = -INF;
+            dp[r][c][3] = -INF;
+        }
+    }
     for (int i = 0; i <= R; ++i){
         for (int j = 0; j <= C; ++j){
             V[i][j] = 0;
@@ -15,25 +53,16 @@ int main() {
     for (int i = 0; i < K; ++i){
         int r, c, v;
         cin >> r >> c >> v;
-        V[r][c] = v;
+        V[r-1][c-1] = v;
     }
 
-    for (int i = 1; i <= R; ++i){
-        for (int j = 1; j <= C; ++j){
-            for (int k = 3; k <= 0; --k){
-                if (k == 3){
-                    dp[i][j][k] = dp[i-1][j][k]
-                } else {
-                    dp[i][j][k] = dp[i-i][j][k+1] + V[i][j];
-
-                }
-                dp[i][j][k] = max(dp[i-1] )
-            }
-        }
-    }
-
-
-
-    cout << 0 << endl;     
+    dp[0][0][0] = 0;
+    dp[0][0][1] = V[0][0];
+    ll res = -INF;
+    res = max(res, dfs(R-1, C-1, 0));
+    res = max(res, dfs(R-1, C-1, 1));
+    res = max(res, dfs(R-1, C-1, 2));
+    res = max(res, dfs(R-1, C-1, 3));
+    cout << res << endl;     
 	return 0;
 }
