@@ -1,25 +1,38 @@
 #include <iostream>
 using namespace std;
+typedef long long ll;
 
-const int mod  = 1e9 + 7;
-long long modpow(long long a, long long n) {
-    long long r = 1;
+const ll MOD = 1e9+7;
+const int MAX = 510000;
+long long fac[MAX], finv[MAX], inv[MAX];
+
+void init() {
+    fac[0] = fac[1] = 1;
+    finv[0] = finv[1] = 1;
+    inv[1] = 1;
+    for (int i = 2; i < MAX; i++){
+        fac[i] = fac[i - 1] * i % MOD;
+        inv[i] = MOD - inv[MOD%i] * (MOD / i) % MOD;
+        finv[i] = finv[i - 1] * inv[i] % MOD;
+    }
+}
+
+ll mod_pow(ll a, ll n) {
+    ll r = 1;
     while(n > 0) {
-        r = r * ( (n%2) ? a : 1) % mod;
-        a = a * a % mod;
+        r = r * ( (n%2) ? a : 1) % MOD;
+        a = a * a % MOD;
         n /= 2;
     }
     return r;
 }
 
-long long modcomb(int n, int k) {
-    if ( n < 0 || k < 0 || k > n) return 0;
-    k = min(k, n - k); //nCk = nC(n-k)
-    long long p = 1, q = 1;
-    while ( k > 0 ) {
-        p = p * n-- % mod; // p = n*(n-1)*(n-2)...(n-k+1)
-        q = q * k-- % mod; // q = k*(k-1)*(k-2)...1
-    }
-    // 1/q = q^(p-2) (mod p)
-    return p * modpow(q, mod - 2) % mod;
+ll mod_comb(int n, int k){
+    if (n < 0 || k < 0 || n < k) return 0;
+    return fac[n] * (finv[k] * finv[n - k] % MOD) % MOD;
+}
+
+ll mod_perm(ll n, ll k){
+    if (n < 0 || k < 0 || n < k) return 0;
+    return fac[n] * finv[n-k] % MOD;
 }

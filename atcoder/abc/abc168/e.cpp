@@ -1,30 +1,31 @@
 #include <iostream>
-#include <vector>
+#include <map>
 #include <tuple>
 #include <algorithm>
 using namespace std;
 typedef long long ll;
 
+ll gcd(ll a, ll b){
+    if (b == 0) return a;
+    return gcd(b, a%b);
+}
 
 int main(){
     int N;
-    vector<tuple<double, ll, ll> > p, n;
+    map<pair<ll, ll>, int> m;
     cin >> N;
     for (int i = 0; i < N; ++i){
         ll a, b;
         cin >> a >> b;
-        if (a*b>=0) {
-            p.push_back(make_tuple((double)a/double(b), a, b));
-        }else{
-            n.push_back(make_tuple((double)a/double(b), a, b));
+        if (b < 0) {
+            a = -a;
+            b = -b;
         }
+        ll g = gcd(a, b);
+
+        m[make_pair(a/g, b/g)]++;
     }
 
-
-
-    for (int i = 0; i < N; ++i){
-        cout << get<0>(iwashi[i]) << endl;
-    }
-
+    
     return 0;
 }
